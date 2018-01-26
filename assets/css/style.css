@@ -1,0 +1,24 @@
+.character-row {
+    height: 100px;
+}
+
+.character-photo {
+    height: 375px;
+    width: 300px;
+}
+
+.char1 {
+    background-image: url(../images/fey-headshot.jpg);
+}
+
+.char2 {
+    background-image: url(../images/wiig-headshot.jpg);
+}
+
+.char3 {
+    background-image: url(../images/mckinnon-headshot.jpg);
+}
+
+.char4 {
+    background-image: url(../images/rudolph-headshot.jpg);
+}
