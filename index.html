@@ -16,16 +16,25 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h2>Choose Your Player</h2>
+                <h2 id="player-row">Choose Your Player</h2>
             </div>
             <div class="row character-row" id="characters"></div>
         </div>
 
-        <div class="row">
+        <div class="row enemy-row hidden">
             <div class="col-md-12">
-                <h2>Choose Your Enemy</h2>
+                <h2>Choose an Enemy</h2>
             </div>
             <div class="row character-row" id="enemies"></div>
+        </div>
+
+        <button class="hidden" id="fight-button">Fight</button>
+
+        <div class="row defender-row hidden">
+            <div class="col-md-12">
+                <h2>Your Enemy</h2>
+            </div>
+            <div class="row character-row" id="defender"></div>
         </div>
 
 
