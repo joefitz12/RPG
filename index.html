@@ -21,20 +21,28 @@
 
             <div class="row hero-row">
                 <div class="col-md-12">
-                    <h2 id="player-row">Choose Your Band</h2>
+                    <h2>
+                        <span id="hero-row-text">Choose Your Band</span>
+                    </h2>
                 </div>
                 <div class="row character-row" id="characters"></div>
             </div>
 
             <div class="row damage-bar">
                 <button class="hidden" id="fight-button"></button>
-                <h2 class="hidden damage" id="hero-damage"></h2>
-                <h2 class="hidden damage" id="defender-damage"></h2>
+                <h2 class="hidden damage">
+                    <span class="hero-damage"></span>
+                </h2>
+                <h2 class="hidden damage">
+                    <span class="defender-damage"></span>
+                </h2>
             </div>
 
             <div class="row enemy-row hidden">
                 <div class="col-md-12">
-                    <h2>Choose an Opponent</h2>
+                    <h2>
+                        <span id="enemy-row-text">Choose Your Opponent</span>
+                    </h2>
                 </div>
                 <div class="row character-row" id="enemies"></div>
             </div>
@@ -43,7 +51,9 @@
 
             <div class="row defender-row hidden">
                 <div class="col-md-12">
-                    <h2>Your Enemy</h2>
+                    <h2>
+                        <span id="defender-row-text">Your Opponent</span>
+                    </h2>
                 </div>
                 <div class="row character-row" id="defender"></div>
             </div>
