@@ -158,7 +158,7 @@ var chooseDefender = function(){
                 newDiv.html(defender.photo);
                 $(".enemy-row").addClass("hidden");
                 $("#fight-button").text(fightText);
-                $(".damage").empty();
+                $(".damage").addClass("hidden");
                 $("#fight-button").removeClass("hidden");
                 $(".defender-row").removeClass("hidden");
                 $("#defender").append(newDiv);
@@ -228,15 +228,15 @@ kills = 0;
 var fightRound = function() {
     defender.hp = defender.hp - hero.attack;
     $(".damage").removeClass("hidden");
-    $("h2 .hero-damage").html("You " + fightText() + " for " + hero.attack + " damage!");
+    $(".hero-damage").html("You " + fightText() + " for " + hero.attack + " damage!");
     roundNumber++;
     hero.attack = hero.attack * roundNumber;
     hero.hp = hero.hp - defender.counter;
-    $("h2 .defender-damage").html(defender.name + " " + fightText() + " for " + defender.counter + " damage!");
+    $(".defender-damage").html(defender.name + " " + fightText() + " for " + defender.counter + " damage!");
     $(".hero-stats").html(hero.name + "<br />" + "HP: " + hero.hp);
     $(".defender-stats").html(defender.name + "<br />" + "HP: " + defender.hp);
     if (defender.hp < 0){
-        $("h2 > #defender-damage").html(defender.name + " " + fightText() + " for " + defender.counter + " damage, but it's too late! They're all rocked out.");
+        $(".defender-damage").html(defender.name + " " + fightText() + " for " + defender.counter + " damage, but it's too late! They're all rocked out.");
         characters[defender.index].dead = true;
         kills++;
         $("#defender").empty();
@@ -246,15 +246,15 @@ var fightRound = function() {
         $(".enemy-row").removeClass("hidden");
         if (kills === 3){
             $(".enemy-row").addClass("hidden");
-            $("h2 > #defender-damage").html("The writing was on the wall. " + defender.name + " " + fightText() + " for " + defender.counter + " damage, but it's all over. You're the champ!");
+            $(".defender-damage").html("The writing was on the wall. " + defender.name + " " + fightText() + " for " + defender.counter + " damage, but it's all over. You're the champ!");
         }
     }
     if (hero.hp < 0){
         characters[hero.index].dead = true;
         $(".enemy-row").addClass("hidden");
         characterDisplay();
-        $("h2 > #hero-damage").html("Bad news, bud. You " + fightText() + " for " + hero.attack + " damage, but...");
-        $("h2 > #defender-damage").html(defender.name + " " + fightText() + " for " + defender.counter + " damage. You're soaked, pal. Brutal.");
+        $(".hero-damage").html("Bad news, bud. You " + fightText() + " for " + hero.attack + " damage, but...");
+        $(".defender-damage").html(defender.name + " " + fightText() + " for " + defender.counter + " damage. You're soaked, pal. Brutal.");
     }
     $("#fight-button").text(fightText);
 }

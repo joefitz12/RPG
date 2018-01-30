@@ -21,7 +21,7 @@
 
             <div class="row hero-row">
                 <div class="col-md-12">
-                    <h2>
+                    <h2 class="identifier">
                         <span id="hero-row-text">Choose Your Band</span>
                     </h2>
                 </div>
@@ -29,18 +29,22 @@
             </div>
 
             <div class="row damage-bar">
-                <button class="hidden" id="fight-button"></button>
-                <h2 class="hidden damage">
-                    <span class="hero-damage"></span>
-                </h2>
-                <h2 class="hidden damage">
-                    <span class="defender-damage"></span>
-                </h2>
+                <div class="col-md-2">
+                    <button class="hidden" id="fight-button"></button>
+                </div>
+                <div class="col-md-10">
+                    <p class="hidden damage sticker1">
+                        <span class="hero-damage"></span>
+                    </p>
+                    <p class="hidden damage sticker2">
+                        <span class="defender-damage"></span>
+                    </p>
+                </div>
             </div>
 
             <div class="row enemy-row hidden">
                 <div class="col-md-12">
-                    <h2>
+                    <h2 class="identifier">
                         <span id="enemy-row-text">Choose Your Opponent</span>
                     </h2>
                 </div>
@@ -51,8 +55,8 @@
 
             <div class="row defender-row hidden">
                 <div class="col-md-12">
-                    <h2>
-                        <span id="defender-row-text">Your Opponent</span>
+                    <h2 class="identifier">
+                        <span id="defender-row-text">Opponent</span>
                     </h2>
                 </div>
                 <div class="row character-row" id="defender"></div>
