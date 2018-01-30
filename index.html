@@ -19,13 +19,30 @@
 
         <div class="container">
 
-            <div class="row hero-row">
+            <div class="row select-row">
                 <div class="col-md-12">
-                    <h2 class="identifier">
-                        <span id="hero-row-text">Choose Your Band</span>
+                    <h2 class="identifier sticker1">
+                        <span id="character-row-text">Choose Your Band</span>
                     </h2>
                 </div>
                 <div class="row character-row" id="characters"></div>
+            </div>
+
+            <div class="row hero-row hidden">
+                <div class="col-md-3">
+                    <h2 class="identifier sticker2">
+                        <span id="hero-row-text">Your Hero</span>
+                    </h2>
+                    <div class="row character-row" id="hero"></div>
+                </div>
+                <div class="col-md-9">
+                    <p class="hidden damage sticker1">
+                        <span class="hero-damage"></span>
+                    </p>
+                    <p class="hidden dead-damage sticker2">
+                        <span class="dead-defender-damage"></span>
+                    </p>
+                </div>
             </div>
 
             <div class="row damage-bar">
@@ -33,9 +50,17 @@
                     <button class="hidden" id="fight-button"></button>
                 </div>
                 <div class="col-md-10">
-                    <p class="hidden damage sticker1">
-                        <span class="hero-damage"></span>
-                    </p>
+                </div>
+            </div>
+
+            <div class="row defender-row hidden">
+                <div class="col-md-3" id="live-defender">
+                    <h2 class="identifier sticker3">
+                        <span id="defender-row-text">Opponent</span>
+                    </h2>
+                    <div class="row character-row" id="defender"></div>
+                </div>
+                <div class="col-md-9">
                     <p class="hidden damage sticker2">
                         <span class="defender-damage"></span>
                     </p>
@@ -44,22 +69,11 @@
 
             <div class="row enemy-row hidden">
                 <div class="col-md-12">
-                    <h2 class="identifier">
+                    <h2 class="identifier sticker4">
                         <span id="enemy-row-text">Choose Your Opponent</span>
                     </h2>
                 </div>
                 <div class="row character-row" id="enemies"></div>
-            </div>
-
-
-
-            <div class="row defender-row hidden">
-                <div class="col-md-12">
-                    <h2 class="identifier">
-                        <span id="defender-row-text">Opponent</span>
-                    </h2>
-                </div>
-                <div class="row character-row" id="defender"></div>
             </div>
 
         </div>

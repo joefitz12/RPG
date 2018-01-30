@@ -3,8 +3,8 @@ var characters = {
         index: "char1",
         name: "The Wonders",
         hp: 110,
-        attack: 7,
-        counter: 16,
+        attack: 11,
+        counter: 12,
         photo: "<img src='assets/images/thewonders.png' alt='The Wonders, from the film That Thing You Do!' />",
         dead: false,
     },
@@ -12,16 +12,16 @@ var characters = {
         index: "char2",
         name: "Sex Bob-omb",
         hp: 90,
-        attack: 13,
-        counter: 25,
+        attack: 17,
+        counter: 14,
         photo: "<img src='assets/images/sexbobomb.png' alt='Sex Bob-omb, from the film Scott Pilgrim vs the World' />",
         dead: false,
     },
     char3: {
         index: "char3",
         name: "The Blues Brothers",
-        hp: 120,
-        attack: 6,
+        hp: 130,
+        attack: 9,
         counter: 11,
         photo: "<img src='assets/images/bluesbrothers.jpg' alt='The Blues Brothers, from the film of the same name' />",
         dead: false,
@@ -30,8 +30,8 @@ var characters = {
         index: "char4",
         name: "Otis Day & The Knights",
         hp: 100,
-        attack: 8,
-        counter: 18,
+        attack: 12,
+        counter: 13,
         photo: "<img src='assets/images/otisdayandtheknights.jpg' alt='Otis Day & The Knights, from the film Animal House' />",
         dead: false,
     }
@@ -88,7 +88,7 @@ var characterDisplay = function(){
     for (key in characters){
         if (hero.name === "") {
             var newDiv = $("<div>");
-            newDiv.addClass("col-md-2 character-photo stats-needed");
+            newDiv.addClass("col-md-2 character-select character-photo stats-needed");
             newDiv.attr("data-index", characters[key].index);
             newDiv.attr("data-name", characters[key].name);
             newDiv.attr("data-hp", characters[key].hp);
@@ -99,7 +99,15 @@ var characterDisplay = function(){
             $("#characters").append(newDiv);
             statsDisplay();
         }
-        else if (hero.name === characters[key].name && characters[hero.index].dead === false) {
+    }
+}
+
+
+characterDisplay();
+
+var heroDisplay = function(){
+    for (key in characters){
+        if (hero.name === characters[key].name && characters[hero.index].dead === false) {
             var newDiv = $("<div>");
             newDiv.addClass("col-md-2 character-photo stats-needed");
             newDiv.attr("data-index", characters[key].index);
@@ -109,11 +117,11 @@ var characterDisplay = function(){
             newDiv.attr("data-counter", characters[key].counter);
             newDiv.attr("data-photo", characters[key].photo);
             newDiv.html(characters[key].photo);
-            $("#characters").append(newDiv);
+            $("#hero").append(newDiv);
             statsDisplay();
         }
         else if (hero.name === characters[key].name && characters[hero.index].dead === true) {
-            $("#characters").empty();
+            $("#hero").empty();
             var newDiv = $("<div>");
             newDiv.addClass("col-md-2 character-photo x-needed stats-needed");
             newDiv.attr("data-index", characters[key].index);
@@ -123,14 +131,50 @@ var characterDisplay = function(){
             newDiv.attr("data-counter", characters[key].counter);
             newDiv.attr("data-photo", characters[key].photo);
             newDiv.html(characters[key].photo);
-            $("#characters").append(newDiv);
+            $("#hero").append(newDiv);
             deadDisplay();
             statsDisplay();
         }
     }
 }
 
-characterDisplay();
+var defenderDisplay = function(){
+    for (key in characters){
+        if (defender.name === characters[key].name && characters[key].dead === false){
+            var newDiv = $("<div>");
+            newDiv.addClass("col-md-2 character-photo stats-needed");
+            newDiv.attr("data-index", characters[key].index);
+            newDiv.attr("data-name", defender.name);
+            newDiv.attr("data-hp", defender.hp);
+            newDiv.attr("data-attack", defender.attack);
+            newDiv.attr("data-counter", defender.counter);
+            newDiv.attr("data-photo", defender.photo);
+            newDiv.html(defender.photo);
+            $(".enemy-row").addClass("hidden");
+            $("#fight-button").text(fightText);
+            $(".damage").addClass("hidden");
+            $(".dead-damage").addClass("hidden");
+            $("#fight-button").removeClass("hidden");
+            $(".defender-row").removeClass("hidden");
+            $("#defender").append(newDiv);
+            statsDisplay();
+        }
+        else if (defender.name === characters[key].name && characters[key].dead === true){
+            var newDiv = $("<div>");
+            newDiv.addClass("col-md-2 character-photo x-needed stats-needed");
+            newDiv.attr("data-index", characters[key].index);
+            newDiv.attr("data-name", characters[key].name);
+            newDiv.attr("data-hp", characters[key].hp);
+            newDiv.attr("data-attack", characters[key].attack);
+            newDiv.attr("data-counter", characters[key].counter);
+            newDiv.attr("data-photo", characters[key].photo);
+            newDiv.html(characters[key].photo);
+            $("#defender").append(newDiv);
+            deadDisplay();
+            statsDisplay();
+        }
+    }
+}
 
 var chooseDefender = function(){
     $("#defender").empty();
@@ -143,31 +187,7 @@ var chooseDefender = function(){
         photo: $(this).attr("data-photo")
     }
 
-
-    var addDefender = function(){
-        for (key in characters){
-            if (defender.name === characters[key].name){
-                var newDiv = $("<div>");
-                newDiv.addClass("col-md-2 character-photo stats-needed");
-                newDiv.attr("data-index", characters[key].index);
-                newDiv.attr("data-name", defender.name);
-                newDiv.attr("data-hp", defender.hp);
-                newDiv.attr("data-attack", defender.attack);
-                newDiv.attr("data-counter", defender.counter);
-                newDiv.attr("data-photo", defender.photo);
-                newDiv.html(defender.photo);
-                $(".enemy-row").addClass("hidden");
-                $("#fight-button").text(fightText);
-                $(".damage").addClass("hidden");
-                $("#fight-button").removeClass("hidden");
-                $(".defender-row").removeClass("hidden");
-                $("#defender").append(newDiv);
-                statsDisplay();
-            }
-        }
-    }
-
-    addDefender();
+    defenderDisplay();
     enemyDisplay();
 }
 
@@ -176,7 +196,7 @@ var enemyDisplay = function(){
     for (key in characters){
         if (hero.name !== characters[key].name && characters[key].dead === false){
             var newDiv = $("<div>");
-            newDiv.addClass("col-md-2 character-photo stats-needed");
+            newDiv.addClass("col-md-2 defender-select character-photo stats-needed");
             newDiv.attr("data-index", characters[key].index);
             newDiv.attr("data-name", characters[key].name);
             newDiv.attr("data-hp", characters[key].hp);
@@ -185,10 +205,15 @@ var enemyDisplay = function(){
             newDiv.attr("data-photo", characters[key].photo);
             newDiv.html(characters[key].photo);
             $("#enemies").append(newDiv);
-            $(".character-photo").on("click",chooseDefender);
+            if (characters[hero.index].dead === false){
+                $(".defender-select").on("click",chooseDefender);
+            }
+            else if (characters[hero.index].dead === true){
+                $(".defender-select").off("click");
+            }
             statsDisplay();
         }
-        else if (characters[key].dead === true){
+        else if (hero.name !== characters[key].name && characters[key].dead === true){
             var newDiv = $("<div>");
             newDiv.addClass("col-md-2 character-photo x-needed stats-needed");
             newDiv.attr("data-index", characters[key].index);
@@ -216,9 +241,11 @@ var chooseCharacter = function() {
     };
 
     $("#characters").empty();
+    $(".hero-row").removeClass("hidden");
+    $(".select-row").addClass("hidden");
     $(".enemy-row").removeClass("hidden");
     enemyDisplay();
-    characterDisplay();
+    heroDisplay();
     $("#hero-row-text").text("Your Hero");
 };
 
@@ -230,13 +257,14 @@ var fightRound = function() {
     $(".damage").removeClass("hidden");
     $(".hero-damage").html("You " + fightText() + " for " + hero.attack + " damage!");
     roundNumber++;
-    hero.attack = hero.attack * roundNumber;
+    hero.attack = characters[hero.index].attack * roundNumber;
     hero.hp = hero.hp - defender.counter;
     $(".defender-damage").html(defender.name + " " + fightText() + " for " + defender.counter + " damage!");
     $(".hero-stats").html(hero.name + "<br />" + "HP: " + hero.hp);
     $(".defender-stats").html(defender.name + "<br />" + "HP: " + defender.hp);
     if (defender.hp < 0){
-        $(".defender-damage").html(defender.name + " " + fightText() + " for " + defender.counter + " damage, but it's too late! They're all rocked out.");
+        $(".dead-damage").removeClass("hidden");
+        $(".dead-defender-damage").html(defender.name + " " + fightText() + " for " + defender.counter + " damage, but it's too late! They're all rocked out.");
         characters[defender.index].dead = true;
         kills++;
         $("#defender").empty();
@@ -246,18 +274,23 @@ var fightRound = function() {
         $(".enemy-row").removeClass("hidden");
         if (kills === 3){
             $(".enemy-row").addClass("hidden");
-            $(".defender-damage").html("The writing was on the wall. " + defender.name + " " + fightText() + " for " + defender.counter + " damage, but it's all over. You're the champ!");
+            $(".dead-defender-damage").html("The writing was on the wall. " + defender.name + " " + fightText() + " for " + defender.counter + " damage, but it's all over. You're the champ!");
         }
     }
     if (hero.hp < 0){
         characters[hero.index].dead = true;
-        $(".enemy-row").addClass("hidden");
-        characterDisplay();
+        enemyDisplay();
+        defenderDisplay();
+        $(".damage").removeClass("hidden");
+        heroDisplay();
         $(".hero-damage").html("Bad news, bud. You " + fightText() + " for " + hero.attack + " damage, but...");
         $(".defender-damage").html(defender.name + " " + fightText() + " for " + defender.counter + " damage. You're soaked, pal. Brutal.");
+        if (defender.hp <0){
+            $(".dead-defender-damage").html(defender.name + " " + fightText() + " for " + defender.counter + " damage. You're soaked, pal. Brutal.");
+        }
     }
     $("#fight-button").text(fightText);
 }
 
-$(".character-photo").on("click",chooseCharacter);
+$(".character-select").on("click",chooseCharacter);
 $("#fight-button").on("click",fightRound);

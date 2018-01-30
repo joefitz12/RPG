@@ -16,17 +16,31 @@ h1 {
 }
 
 .identifier {
-    margin-bottom: 0px;
+    margin-bottom: -10px;
 }
 
-#hero-row-text,
-#enemy-row-text,
-#defender-row-text {
-    background: rgba(0, 0, 0, 0.842);
+#hero-row-text {
+    background: #000;
     padding: 0px 22px 7px 1px;
 }
 
-.defender-damage {
+#character-row-text {
+    background: #000;
+    padding: 11px 2px 1px 7px;
+}
+
+#enemy-row-text {
+    background: #000;
+    padding: 13px 18px 5px 0px;
+}
+
+#defender-row-text {
+    background: #000;
+    padding: 3px 1px 11px 17px;
+}
+
+.defender-damage,
+.dead-defender-damage {
     background: #000;
     padding: 11px 19px 13px 1px;
     overflow: auto;
@@ -45,25 +59,40 @@ h3 {
 .enemy-row,
 .defender-row {
     position: relative;
-    height: 300px;
+    height: 250px;
 }
 
 .damage-bar {
     position: relative;
-    max-height: 50%;
+    margin: 0;
 }
 
 .damage {
     font-size: 24px;
-    float: left;
+    margin-top: 20%;
+}
+
+.dead-damage {
+    font-size: 24px;
+    margin-top: 5%;
 }
 
 .sticker1 {
-    -webkit-transform: rotate(3deg);
-    transform: rotate(3deg);
+    -webkit-transform: rotate(-1deg);
+    transform: rotate(-1deg);
 }
 
 .sticker2 {
+    -webkit-transform: rotate(2deg);
+    transform: rotate(2deg);
+}
+
+.sticker3 {
+    -webkit-transform: rotate(-1deg);
+    transform: rotate(-1deg);
+}
+
+.sticker4 {
     -webkit-transform: rotate(-2deg);
     transform: rotate(-2deg);
 }
