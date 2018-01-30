@@ -1,12 +1,39 @@
-.character-row {
-    height: 100px;
+body {
+    background-image: url("../images/background.png");
+    background-size: cover;
+}
+
+.container {
+    width: 80%;
+}
+
+.character-row,
+.enemy-row,
+.defender-row {
+    position: relative;
+    height: 300px;
+}
+
+.damage-bar {
+    position: relative;
 }
 
 .character-photo {
-    height: 375px;
-    width: 300px;
+    width: 250px;
+    position: relative;
+    margin: 20px auto;
 }
 
-.hidden {
-    display: none;
+.character-stats {
+    position: absolute;
+    top: 136px;
+    color: #e4e3e3;
 }
+
+img {
+    position: relative;
+    width: 100%;
+    clip: rect(0px,270px,304px,0px);
+}
+
+
