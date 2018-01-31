@@ -55,6 +55,9 @@ var defender = {
     photo: ""
 };
 
+var roundNumber = 1;
+var kills = 0;
+
 var fightText = function(){
     var fightWords = ["rock", "rock n rolllll", "rage", "thrash", "trill", "shred", "melt faces", "pump up the jam", "bump it", "take the express train to Shredtown", "bring down the house", "turn it up to 11", "boogie"]
     var rockWord = fightWords[Math.floor(13 * Math.random())];
@@ -161,6 +164,7 @@ var defenderDisplay = function(){
             $("#fight-button").text(fightText);
             $(".damage").addClass("hidden");
             $(".dead-damage").addClass("hidden");
+            $("#fight-button").show();
             $("#fight-button").removeClass("hidden");
             $(".defender-row").removeClass("hidden");
             $("#defender").append(newDiv);
@@ -256,10 +260,8 @@ var chooseCharacter = function() {
     $("#hero-row-text").text("Your Hero");
 };
 
-roundNumber = 1;
-kills = 0;
-
 var fightRound = function() {
+    $("#fight-button").text(fightText);
     defender.hp = defender.hp - hero.attack;
     $(".damage").removeClass("hidden");
     $(".hero-damage-container").removeClass("sticker1").removeClass("sticker2").removeClass("sticker3").removeClass("sticker4").removeClass("sticker5").removeClass("sticker6");
@@ -282,11 +284,12 @@ var fightRound = function() {
         kills++;
         $("#defender").empty();
         $(".defender-row").addClass("hidden");
-        $("#fight-button").addClass("hidden");
+        $("#fight-button").hide();
         enemyDisplay();
         $(".enemy-row").removeClass("hidden");
         if (kills === 3){
             $(".dead-defender-damage").html("The writing was on the wall. " + defender.name + " " + fightText() + " for " + defender.counter + " damage, but it's all over. You're the champ!");
+            $("#reset-button").removeClass("hidden");
         }
     }
     if (hero.hp < 0){
@@ -297,12 +300,51 @@ var fightRound = function() {
         heroDisplay();
         $(".hero-damage").html("Bad news, bud. You " + fightText() + " for " + hero.attack + " damage, but...");
         $(".defender-damage").html(defender.name + " " + fightText() + " for " + defender.counter + " damage. You're soaked, pal. Brutal.");
+        $("#reset-button").removeClass("hidden");
         if (defender.hp <0){
             $(".dead-defender-damage").html(defender.name + " " + fightText() + " for " + defender.counter + " damage. You're soaked, pal. Brutal.");
         }
     }
-    $("#fight-button").text(fightText);
 }
 
-$(".character-select").on("click",chooseCharacter);
+var reset = function(){
+    for (key in characters){
+        characters[key].dead = false;
+    }
+
+    hero = {
+        index: "",
+        name: "",
+        hp: "",
+        attack: "",
+        counter: "",
+        photo: ""
+    };
+    
+    defender = {
+        index: "",
+        name: "",
+        hp: "",
+        attack: "",
+        counter: "",
+        photo: ""
+    };
+    roundNumber = 1;
+    kills = 0;
+
+    $("#reset-button").addClass("hidden");
+    $(".select-row").removeClass("hidden");
+    characterDisplay();
+    $("#hero").empty();
+    $(".hero-row").addClass("hidden");
+    $(".enemy-row").addClass("hidden");
+    $(".defender-row").addClass("hidden");
+    $(".hero-damage").empty();
+    $(".defender-damage").empty();
+    $(".dead-defender-damage").empty();
+    $(".character-select").on("click", chooseCharacter);
+}
+
+$(".character-select").on("click", chooseCharacter);
 $("#fight-button").on("click",fightRound);
+$("#reset-button").on("click", reset);
