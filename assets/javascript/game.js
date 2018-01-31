@@ -2,9 +2,9 @@ var characters = {
     char1: {
         index: "char1",
         name: "The Wonders",
-        hp: 110,
+        hp: 112,
         attack: 11,
-        counter: 12,
+        counter: 18,
         photo: "<img src='assets/images/thewonders.png' alt='The Wonders, from the film That Thing You Do!' />",
         dead: false,
     },
@@ -12,26 +12,26 @@ var characters = {
         index: "char2",
         name: "Sex Bob-omb",
         hp: 90,
-        attack: 17,
-        counter: 14,
+        attack: 19,
+        counter: 22,
         photo: "<img src='assets/images/sexbobomb.png' alt='Sex Bob-omb, from the film Scott Pilgrim vs the World' />",
         dead: false,
     },
     char3: {
         index: "char3",
         name: "The Blues Brothers",
-        hp: 130,
-        attack: 9,
-        counter: 11,
+        hp: 173,
+        attack: 7,
+        counter: 9,
         photo: "<img src='assets/images/bluesbrothers.jpg' alt='The Blues Brothers, from the film of the same name' />",
         dead: false,
     },
     char4: {
         index: "char4",
         name: "Otis Day & The Knights",
-        hp: 100,
-        attack: 12,
-        counter: 13,
+        hp: 160,
+        attack: 8,
+        counter: 12,
         photo: "<img src='assets/images/otisdayandtheknights.jpg' alt='Otis Day & The Knights, from the film Animal House' />",
         dead: false,
     }
@@ -61,6 +61,12 @@ var fightText = function(){
     return rockWord;
 }
 
+var stickerClass = function(){
+    var stickers = ["sticker1", "sticker2", "sticker3", "sticker4", "sticker5", "sticker6"];
+    var newSticker = stickers[Math.floor(6 * Math.random())];
+    return newSticker;
+}
+
 var statsDisplay = function() {
     var statsDiv = $("<h3>");
     statsDiv.html(characters[key].name + "<br />" + "HP: " + characters[key].hp);
@@ -77,6 +83,7 @@ var statsDisplay = function() {
 
 var deadDisplay = function() {
     var deadDiv = $("<h3>");
+    deadDiv.addClass(stickerClass);
     deadDiv.html("X");
     deadDiv.addClass("dead");
     $(".x-needed").append(deadDiv);
@@ -255,15 +262,21 @@ kills = 0;
 var fightRound = function() {
     defender.hp = defender.hp - hero.attack;
     $(".damage").removeClass("hidden");
+    $(".hero-damage-container").removeClass("sticker1").removeClass("sticker2").removeClass("sticker3").removeClass("sticker4").removeClass("sticker5").removeClass("sticker6");
+    $(".hero-damage-container").addClass(stickerClass);
     $(".hero-damage").html("You " + fightText() + " for " + hero.attack + " damage!");
     roundNumber++;
     hero.attack = characters[hero.index].attack * roundNumber;
     hero.hp = hero.hp - defender.counter;
+    $(".defender-damage-container").removeClass("sticker1").removeClass("sticker2").removeClass("sticker3").removeClass("sticker4").removeClass("sticker5").removeClass("sticker6");
+    $(".defender-damage-container").addClass(stickerClass);
     $(".defender-damage").html(defender.name + " " + fightText() + " for " + defender.counter + " damage!");
     $(".hero-stats").html(hero.name + "<br />" + "HP: " + hero.hp);
     $(".defender-stats").html(defender.name + "<br />" + "HP: " + defender.hp);
     if (defender.hp < 0){
         $(".dead-damage").removeClass("hidden");
+        $(".dead-damage-container").removeClass("sticker1").removeClass("sticker2").removeClass("sticker3").removeClass("sticker4").removeClass("sticker5").removeClass("sticker6");
+        $(".dead-damage-container").addClass(stickerClass);
         $(".dead-defender-damage").html(defender.name + " " + fightText() + " for " + defender.counter + " damage, but it's too late! They're all rocked out.");
         characters[defender.index].dead = true;
         kills++;
@@ -273,7 +286,6 @@ var fightRound = function() {
         enemyDisplay();
         $(".enemy-row").removeClass("hidden");
         if (kills === 3){
-            $(".enemy-row").addClass("hidden");
             $(".dead-defender-damage").html("The writing was on the wall. " + defender.name + " " + fightText() + " for " + defender.counter + " damage, but it's all over. You're the champ!");
         }
     }
