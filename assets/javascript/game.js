@@ -255,6 +255,7 @@ var enemyDisplay = function(){
 }
 
 var chooseCharacter = function() {
+
     hero = {
         index: $(this).attr("data-index"),
         name: $(this).attr("data-name"),
@@ -264,9 +265,9 @@ var chooseCharacter = function() {
         photo: $(this).attr("data-photo"),
         song: $(this).attr("data-song")
     };
-    
-    // var songToPlay = document.querySelector($(this).attr("data-song"));
-    // songToPlay.play();
+
+    document.querySelector(hero.song).load();
+    document.querySelector(hero.song).play();
     $("#characters").empty();
     $(".hero-row").removeClass("hidden");
     $(".select-row").addClass("hidden");
@@ -275,6 +276,18 @@ var chooseCharacter = function() {
     heroDisplay();
     $("#hero-row-text").text("Your Hero");
 };
+
+var mute = function(){
+    if (document.querySelector(hero.song).volume === 1){
+        document.querySelector(hero.song).volume = 0;
+        $("#mute").text("Tunes");
+    }
+    else {
+        document.querySelector(hero.song).volume = 1;
+        $("#mute").text("Mute");
+    }
+    
+}
 
 var fightRound = function() {
     $("#fight-button").text(fightText);
@@ -329,6 +342,8 @@ var reset = function(){
         characters[key].dead = false;
     }
 
+    document.querySelector(hero.song).pause();
+
     hero = {
         index: "",
         name: "",
@@ -350,7 +365,7 @@ var reset = function(){
     };
     roundNumber = 1;
     kills = 0;
-
+    
     $("#reset-button").addClass("hidden");
     $(".select-row").removeClass("hidden");
     characterDisplay();
@@ -365,5 +380,6 @@ var reset = function(){
 }
 
 $(".character-select").on("click", chooseCharacter);
+$("#mute").on("click",mute);
 $("#fight-button").on("click",fightRound);
 $("#reset-button").on("click", reset);

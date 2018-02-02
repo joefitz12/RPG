@@ -153,3 +153,15 @@ img {
     border: 2px solid #242424;
     z-index: -1;
 }
+
+.footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+#mute {
+    float: right;
+    margin: 0 15px 15px 0;
+}
+
